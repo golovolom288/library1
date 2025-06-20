@@ -3,6 +3,7 @@ import json
 from flask import render_template
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 from livereload import Server, shell
+from more_itertools import chunked
 
 
 def render_site():
@@ -15,12 +16,13 @@ def render_site():
     with open("media/meta_data.json", "r+", encoding="utf-8") as json_file:
         books = json.load(json_file)
 
-    render_page = template.render(books=books)
+    render_page = template.render(books=list(chunked(books, 2)))
 
     with open("index.html", "w+", encoding="utf-8") as template:
         template.write(render_page)
 
 
+render_site()
 server = Server()
 server.watch('template.html', render_site)
 server.serve()

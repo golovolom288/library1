@@ -1,4 +1,5 @@
 import json
+import math
 import os
 
 from jinja2 import Environment, FileSystemLoader, select_autoescape
@@ -14,12 +15,11 @@ def render_site():
 
     with open("media/meta_data.json", "r+", encoding="utf-8") as json_file:
         books = json.load(json_file)
-    books = list(chunked(books, 20))
+    books = list(chunked(books, 10))
     os.makedirs("pages", exist_ok=True)
     for i, twenty_books in enumerate(books, 1):
         template = env.get_template('template.html')
-        render_page = template.render(books=list(chunked(twenty_books, 2)))
-
+        render_page = template.render(books=list(chunked(twenty_books, 2)), pages_count=len(books), selected_page=i)
         with open(f"pages/index{i}.html", "w+", encoding="utf-8") as template:
             template.write(render_page)
             template.close()
@@ -28,4 +28,4 @@ def render_site():
 render_site()
 server = Server()
 server.watch('template.html', render_site)
-server.serve(default_filename="pages/index1.html")
+server.serve(default_filename="index1.html", root="pages")

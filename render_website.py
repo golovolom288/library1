@@ -15,7 +15,7 @@ def render_site():
 
     with open("media/meta_data.json", "r+", encoding="utf-8") as json_file:
         books = json.load(json_file)
-    books = list(chunked(books, 10))
+    books = list(chunked(books, 20))
     os.makedirs("pages", exist_ok=True)
     for i, twenty_books in enumerate(books, 1):
         template = env.get_template('template.html')
@@ -28,4 +28,4 @@ def render_site():
 render_site()
 server = Server()
 server.watch('template.html', render_site)
-server.serve(default_filename="index1.html", root="pages")
+server.serve(default_filename="pages/index1.html", root=".")

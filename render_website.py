@@ -1,5 +1,4 @@
 import json
-import math
 import os
 
 from jinja2 import Environment, FileSystemLoader, select_autoescape

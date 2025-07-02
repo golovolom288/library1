@@ -2,7 +2,7 @@
 
 Библиотека для удобного чтения книг в интернете, [ссылка на GitHub Pages](https://golovolom288.github.io/library1/pages/index1.html)
 
-![Скриншот](library1/screenshot.png)
+![Скриншот](../screenshot.png)
 
 ## Запуск
 

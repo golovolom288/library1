@@ -8,8 +8,8 @@ from more_itertools import chunked
 
 def render_site():
     env = Environment(
-        loader=FileSystemLoader('.'),
-        autoescape=select_autoescape(['html'])
+        loader=FileSystemLoader("."),
+        autoescape=select_autoescape(["html"])
     )
     count_books_on_page = 20
     with open("media/meta_data.json", "r+", encoding="utf-8") as json_file:
@@ -17,7 +17,7 @@ def render_site():
     books = list(chunked(books, count_books_on_page))
     os.makedirs("pages", exist_ok=True)
     for page_id, page_with_books in enumerate(books, 1):
-        template = env.get_template('template.html')
+        template = env.get_template("template.html")
         render_page = template.render(books=list(chunked(page_with_books, 2)), pages_count=len(books), selected_page=page_id)
         with open(f"pages/index{page_id}.html", "w+", encoding="utf-8") as template:
             template.write(render_page)
@@ -27,7 +27,7 @@ def render_site():
 def main():
     render_site()
     server = Server()
-    server.watch('template.html', render_site)
+    server.watch("template.html", render_site)
     server.serve(default_filename="pages/index1.html", root=".")
 
 

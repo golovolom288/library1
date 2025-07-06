@@ -1,18 +1,27 @@
+import argparse
 import json
 import os
 
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 from livereload import Server
 from more_itertools import chunked
+from dotenv import load_dotenv
 
 
 def render_site():
+    load_dotenv()
     env = Environment(
         loader=FileSystemLoader("."),
         autoescape=select_autoescape(["html"])
     )
     count_books_on_page = 20
-    with open("media/meta_data.json", "r+", encoding="utf-8") as json_file:
+    parser = argparse.ArgumentParser(
+        prog='Online library',
+        description='Online library for reading',
+    )
+    parser.add_argument("data_filepath", nargs="?", default=os.getenv("DEFAULT_DATA_FILEPATH"))
+    args = parser.parse_args()
+    with open(args.data_filepath, "r+", encoding="utf-8") as json_file:
         books = json.load(json_file)
     books = list(chunked(books, count_books_on_page))
     os.makedirs("pages", exist_ok=True)

@@ -4,17 +4,19 @@
 
 ![Скриншот](https://github.com/golovolom288/library1/blob/main/screenshot.PNG)
 
-## Запуск
+## Запуск оффлайн
 
 Для запуска сайта вам понадобится Python третьей версии.
 
-Скачайте код с GitHub. Установите зависимости:
+Скачайте код с GitHub.
+
+Установите зависимости:
 
 ```sh
 pip install -r requirements.txt
 ```
 
-Запустите сервер
+Запустите сервер из корня проекта данной командой
 
 ```sh
 python render_website.py

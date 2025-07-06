@@ -24,7 +24,12 @@ def render_site():
             template.close()
 
 
-render_site()
-server = Server()
-server.watch('template.html', render_site)
-server.serve(default_filename="pages/index1.html", root=".")
+def main():
+    render_site()
+    server = Server()
+    server.watch('template.html', render_site)
+    server.serve(default_filename="pages/index1.html", root=".")
+
+
+if __name__ == "__main__":
+    main()

@@ -16,10 +16,10 @@ def render_site():
         books = json.load(json_file)
     books = list(chunked(books, count_books_on_page))
     os.makedirs("pages", exist_ok=True)
-    for i, page_with_books in enumerate(books, 1):
+    for page_id, page_with_books in enumerate(books, 1):
         template = env.get_template('template.html')
-        render_page = template.render(books=list(chunked(page_with_books, 2)), pages_count=len(books), selected_page=i)
-        with open(f"pages/index{i}.html", "w+", encoding="utf-8") as template:
+        render_page = template.render(books=list(chunked(page_with_books, 2)), pages_count=len(books), selected_page=page_id)
+        with open(f"pages/index{page_id}.html", "w+", encoding="utf-8") as template:
             template.write(render_page)
             template.close()
 

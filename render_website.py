@@ -1,7 +1,6 @@
 import argparse
 import json
 import os
-import urllib.parse
 
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 from livereload import Server
@@ -28,7 +27,6 @@ def render_site(json_file_path):
         )
         with open(f"pages/index{page_id}.html", "w", encoding="utf-8") as template:
             template.write(render_page)
-            template.close()
 
 
 def main():

@@ -37,7 +37,10 @@ def main():
     )
     parser.add_argument("data_filepath", nargs="?", default=os.getenv("DEFAULT_DATA_FILEPATH"))
     args = parser.parse_args()
-    render_site(args.data_filepath)
+    if args.data_filepath:
+        render_site(args.data_filepath)
+    else:
+        render_site("media/meta_data.json")
     server = Server()
     server.watch("template.html", lambda: render_site(args.data_filepath))
     server.serve(default_filename="pages/index1.html", root=".")
